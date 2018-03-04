@@ -27,8 +27,6 @@ public class ToughJetProcessor extends SupplierProcessor<ToughJetRequest, List<T
     private static final String SUPPLIER = "ToughJet";
     private static final double MAX_PERCENTS_COUNT = 100D;
 
-    private ToughJetClient toughJetClient;
-
     public ToughJetProcessor(ToughJetClient toughJetClient) {
         super(toughJetClient);
     }

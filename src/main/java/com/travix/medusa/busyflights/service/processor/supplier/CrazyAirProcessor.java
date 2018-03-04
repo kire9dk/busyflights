@@ -24,11 +24,8 @@ public class CrazyAirProcessor extends SupplierProcessor<CrazyAirRequest, List<C
     private static final Logger LOGGER = LoggerFactory.getLogger(CrazyAirProcessor.class);
     private static final String SUPPLIER = "CrazyAir";
 
-    private CrazyAirClient crazyAirClient;
-
     public CrazyAirProcessor(CrazyAirClient crazyAirClient) {
         super(crazyAirClient);
-        this.crazyAirClient = crazyAirClient;
     }
 
     @Override
