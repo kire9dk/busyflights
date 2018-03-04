@@ -1,11 +1,28 @@
 package com.travix.medusa.busyflights.domain.busyflights;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
+
 public class BusyFlightsRequest {
 
+    @NotNull
+    @Size(min = 3, max = 3)
     private String origin;
+    @NotNull
+    @Size(min = 3, max = 3)
     private String destination;
-    private String departureDate;
-    private String returnDate;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate departureDate;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate returnDate;
+    @NotNull
+    @Min(1)
     private int numberOfPassengers;
 
     public String getOrigin() {
@@ -24,19 +41,19 @@ public class BusyFlightsRequest {
         this.destination = destination;
     }
 
-    public String getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(final String departureDate) {
+    public void setDepartureDate(final LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(final String returnDate) {
+    public void setReturnDate(final LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 
