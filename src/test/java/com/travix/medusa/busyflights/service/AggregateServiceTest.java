@@ -2,11 +2,7 @@ package com.travix.medusa.busyflights.service;
 
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsRequest;
 import com.travix.medusa.busyflights.domain.busyflights.BusyFlightsResponse;
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirRequest;
-import com.travix.medusa.busyflights.domain.crazyair.CrazyAirResponse;
-import com.travix.medusa.busyflights.domain.toughjet.ToughJetRequest;
-import com.travix.medusa.busyflights.domain.toughjet.ToughJetResponse;
-import com.travix.medusa.busyflights.service.processor.supplier.SupplierProcessor;
+import com.travix.medusa.busyflights.service.processor.supplier.SupplierProcessorInterface;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -26,9 +23,9 @@ public class AggregateServiceTest {
 
     private AggregateService aggregateService;
     @Mock
-    private SupplierProcessor<ToughJetRequest, ToughJetResponse> toughJetRequestToughJetResponseSupplierProcessor;
+    private SupplierProcessorInterface toughJetRequestToughJetResponseSupplierProcessor;
     @Mock
-    private SupplierProcessor<CrazyAirRequest, CrazyAirResponse> crazyAirResponseSupplierProcessor;
+    private SupplierProcessorInterface crazyAirResponseSupplierProcessor;
 
     @Before
     public void setUp() throws Exception {
@@ -47,9 +44,9 @@ public class AggregateServiceTest {
         thoughJet.setSupplier("ThoughJet");
 
         given(crazyAirResponseSupplierProcessor.processFlightsRequests(refEq(busyFlightsRequest)))
-                .willReturn(asList(crazyAirResponse));
+                .willReturn(singletonList(crazyAirResponse));
         given(toughJetRequestToughJetResponseSupplierProcessor.processFlightsRequests(refEq(busyFlightsRequest)))
-                .willReturn(asList(thoughJet));
+                .willReturn(singletonList(thoughJet));
 
         List<BusyFlightsResponse> busyFlightsResponses = aggregateService.invokeSuppliers(busyFlightsRequest);
 

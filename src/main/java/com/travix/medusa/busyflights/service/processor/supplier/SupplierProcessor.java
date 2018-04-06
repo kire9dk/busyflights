@@ -6,7 +6,7 @@ import com.travix.medusa.busyflights.service.client.HTTPClient;
 
 import java.util.List;
 
-public abstract class SupplierProcessor<Request, Response> {
+public abstract class SupplierProcessor<Request, Response> implements SupplierProcessorInterface {
 
     private HTTPClient<Request, Response> client;
 
@@ -22,6 +22,7 @@ public abstract class SupplierProcessor<Request, Response> {
         return client.invokeClient(flightsRequest);
     }
 
+    @Override
     public List<BusyFlightsResponse> processFlightsRequests(BusyFlightsRequest flightsRequest) {
         return transformToFlightsResponse(invokeSupplier(transformFlightsRequest(flightsRequest)));
     }
